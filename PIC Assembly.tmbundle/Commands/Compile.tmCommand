@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+
+TextMate.save_current_document
+TextMate::Executor.make_project_master_current_document
+
+file = File.new(ENV["TM_FILEPATH"], "r")
+regular_expr = /include [&lt;"]([pP]\d{2}[fF]\d{3})\.inc["&gt;]/
+while (line = file.gets)
+	m = regular_expr.match(line)
+	if (m != nil)
+		break
+	end
+end
+file.close
+
+if (m != nil)
+	TextMate::Executor.run("gpasm", "-p" + m[1].downcase, ENV["TM_FILEPATH"])
+elsif
+	puts "Unable to determine processor type from document (make sure that a header for your processor is included)."
+end</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@b</string>
+	<key>name</key>
+	<string>Compile</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.asm.gpasm</string>
+	<key>uuid</key>
+	<string>B693FCA0-003E-4C36-9E64-E4368B4AC71A</string>
+</dict>
+</plist>
