@@ -1,0 +1,11 @@
+This is a TextMate bundle which provides a language syntax for x86 assembly.
+It hasn't been tested extensively, but it seems to work well enough on the
+assembly files I wrote for another project.
+
+Also, this was forked from amorrow's PIC Assembly syntax, but that doesn't seem
+to have been the most efficient choice. After a few minutes of edits, this
+bundle now bears very little resemblance to the original.
+
+As amorrow's PIC Assembly bundle is a public repository on GitHub, I assume that
+I have his permission to fork the project and make redistribute my changes. The
+changes that I've made are placed in the Public Domain.
